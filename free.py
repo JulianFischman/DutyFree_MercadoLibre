@@ -1,4 +1,6 @@
 # Imports for Selenium
+from doctest import master
+from re import X
 from webbrowser import Chrome
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -54,7 +56,7 @@ usd_official = float(str(json[0]['casa']['venta']).replace(',','.'))
 driver_dufry = webdriver.Chrome(options=chrome_options)
 
 # URLS - FreeShop
-url_fragrances = ['https://buenosaires.shopdutyfree.com/es/beauty/fragrance/para-el','https://buenosaires.shopdutyfree.com/en/beauty/fragrance/for-her']
+url_fragrances = ['https://buenosaires.shopdutyfree.com/es/beauty/fragrance/para-el','https://buenosaires.shopdutyfree.com/es/beauty/fragrance/para-ella']
 
 # Loop to obtain each fragrance URL
 single_urls = [] 
@@ -401,9 +403,15 @@ for ha in range(len(master_meli)):
 master_ml_2 = list(filter(lambda sub_list: 'Sin producto en MercadoLibre' not in sub_list, master_meli))
 compilacion_sheets = list(filter(lambda sub_list: 'Sin producto en MercadoLibre' not in sub_list, gsheets_list))
 
+# Hyperlinks for Google Sheets
+master_ml_3 = [['Precio - MercadoLibre (ARS)','Título de la publicación']]
+for xas in range(len(master_ml_2)):
+    if xas>=1:
+        master_ml_3.append([master_ml_2[xas][0],'=HYPERLINK("'+master_ml_2[xas][2]+'";"'+master_ml_2[xas][1]+'")'])
+
 # Update MercadoLibre products in Google Sheets
 request = sheet.values().update(spreadsheetId=SAMPLE_SPREADSHEET_ID, 
-                            range='General!i2', valueInputOption='USER_ENTERED', body={'values':master_ml_2}).execute()
+                            range='General!I2', valueInputOption='USER_ENTERED', body={'values':master_ml_3}).execute()
 
 # Update Duty Free products in Google Sheets
 request = sheet.values().update(spreadsheetId=SAMPLE_SPREADSHEET_ID, 
