@@ -15,7 +15,7 @@ This project was our first approach to web scraping. The objective was to easily
 
 :handshake: MercadoLibre:
 * Search criteria: Listing titles in duty free weren't suitable for MercadoLibre search so they had to be modified using string manipulation. The final take was to search model + size. 
-* Filters: Since one search offered multiple listings, a series of filters had to be developed to sort out the best result. Firstly, listings were filtered by matching brand and size, assigning them a degree of coincidence. From the remaining listings, the ones that contained matching gender and a degree of coincidence higher than 65% were selected. Finally, the one with the lowest price was the chosen one. 
+* Filters: Since one search offered multiple listings, a series of filters had to be developed to sort out the best result. Firstly, listings were filtered by matching brand and size, assigning them a degree of coincidence. From the remaining listings, the ones that contained matching gender and a degree of coincidence higher than 65% were selected. Finally, the one with the lowest price was chosen. 
 
 # Technologies:
 * Selenium.
